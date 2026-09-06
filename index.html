@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free online Age Calculator with Chronological Age, Age Difference, Next Birthday, Days Old, Age on Date, Baby Age, Pet Age and Photo Age tools.">
+<title>Age Calculator - Complete Age Tools</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e6eaf2;--primary:#5b5bd6;--soft:#f0efff;--shadow:0 14px 45px rgba(20,25,45,.09)}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header,.hero{background:linear-gradient(135deg,#3730a3,#6d5dfc);color:#fff}
+header{padding:17px 5%}nav{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}.logo{font-size:23px;font-weight:800}.hero{text-align:center;padding:65px 20px 95px}.hero h1{font-size:clamp(34px,6vw,58px);margin:0 0 12px}.hero p{max-width:720px;margin:auto;color:#eee;font-size:18px}
+.container{max-width:1180px;margin:-48px auto 0;padding:0 20px 60px}.tabs{background:#fff;padding:10px;border-radius:18px;box-shadow:var(--shadow);display:flex;gap:8px;overflow-x:auto}.tab{border:0;background:transparent;padding:13px 17px;border-radius:11px;font-weight:700;color:var(--muted);white-space:nowrap;cursor:pointer}.tab.active{background:var(--primary);color:#fff}
+.panel{display:none;margin-top:25px}.panel.active{display:block}.card{background:var(--card);padding:30px;border-radius:20px;box-shadow:var(--shadow)}h2{margin:0 0 6px;font-size:28px}.intro{color:var(--muted);margin:0 0 22px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}label{font-weight:700;font-size:14px;display:block;margin-bottom:7px}input,select{width:100%;padding:14px;border:1px solid var(--line);border-radius:11px;font-size:16px;background:#fff;color:var(--text)}
+.actions{margin-top:22px}.primary,.secondary{padding:14px 22px;border-radius:11px;font-weight:800;font-size:15px;cursor:pointer}.primary{border:0;background:var(--primary);color:#fff}.secondary{background:#fff;border:1px solid var(--line);margin-left:8px}
+.result{display:none;margin-top:24px}.result.show{display:block}.big{background:linear-gradient(135deg,#f0efff,#faf9ff);padding:25px;border-radius:17px;text-align:center}.big small{display:block;color:var(--muted)}.big strong{display:block;color:var(--primary);font-size:clamp(28px,5vw,46px);margin-top:5px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}.stat{border:1px solid var(--line);border-radius:14px;padding:17px;text-align:center}.stat b{display:block;color:var(--primary);font-size:23px}.stat span{font-size:13px;color:var(--muted)}
+.info{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}.info div{background:#fafbff;padding:14px;border-radius:11px}.info small{display:block;color:var(--muted)}
+.upload{border:2px dashed #c9c7f8;padding:32px;border-radius:18px;text-align:center;background:#fafaff}.preview{display:none;width:100%;max-width:280px;max-height:280px;object-fit:cover;border-radius:16px;margin:18px auto}.notice{background:#fff8e6;color:#785300;padding:15px;border-radius:11px;margin-top:16px;font-size:14px}
+.tools{margin-top:45px}.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.tool{background:#fff;border:1px solid var(--line);border-radius:17px;padding:21px;cursor:pointer;box-shadow:0 8px 25px rgba(20,25,45,.04);transition:.2s}.tool:hover{transform:translateY(-3px)}.tool h3{margin:0 0 7px}.tool p{margin:0;color:var(--muted);font-size:14px}
+footer{text-align:center;padding:25px;color:var(--muted)}@media(max-width:800px){.form-grid,.info{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.tool-grid{grid-template-columns:1fr}.card{padding:22px}}
+</style>
+</head>
+<body>
+<header><nav><div class="logo">Age Calculator</div><div>Free Complete Age Tools</div></nav></header>
+<section class="hero"><h1>Complete Age Calculator</h1><p>Calculate exact age, chronological age, birthday information, age differences and much more.</p></section>
+
+<main class="container">
+<div class="tabs">
+<button class="tab active" data-tab="age">🎂 Age Calculator</button>
+<button class="tab" data-tab="chrono">📅 Chronological</button>
+<button class="tab" data-tab="difference">👥 Age Difference</button>
+<button class="tab" data-tab="birthday">🎉 Next Birthday</button>
+<button class="tab" data-tab="daysold">📆 Days Old</button>
+<button class="tab" data-tab="ondate">🗓 Age on Date</button>
+<button class="tab" data-tab="baby">👶 Baby Age</button>
+<button class="tab" data-tab="pet">🐶 Pet Age</button>
+<button class="tab" data-tab="profile">🎁 Birthday Profile</button>
+<button class="tab" data-tab="photo">📸 Photo Age</button>
+</div>
+
+<section class="panel active" id="age"><div class="card"><h2>Age Calculator</h2><p class="intro">Calculate your exact age in years, months and days.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="dob"></div><div><label>Calculate Age On</label><input type="date" id="asof"></div></div>
+<div class="actions"><button class="primary" onclick="calcMain()">Calculate Age</button></div><div class="result" id="mainResult"></div></div></section>
+
+<section class="panel" id="chrono"><div class="card"><h2>Chronological Age Calculator</h2><p class="intro">Calculate age from date of birth to a selected reference date.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="cdob"></div><div><label>Reference Date</label><input type="date" id="cref"></div></div>
+<div class="actions"><button class="primary" onclick="calcChrono()">Calculate Chronological Age</button></div><div class="result" id="chronoResult"></div></div></section>
+
+<section class="panel" id="difference"><div class="card"><h2>Age Difference Calculator</h2><p class="intro">Find the exact difference between two dates of birth.</p>
+<div class="form-grid"><div><label>Person 1 Date of Birth</label><input type="date" id="p1"></div><div><label>Person 2 Date of Birth</label><input type="date" id="p2"></div></div>
+<div class="actions"><button class="primary" onclick="calcDifference()">Calculate Difference</button></div><div class="result" id="diffResult"></div></div></section>
+
+<section class="panel" id="birthday"><div class="card"><h2>Next Birthday Calculator</h2><p class="intro">Find out how many days are left until your next birthday.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="bdob"></div></div>
+<div class="actions"><button class="primary" onclick="calcBirthday()">Calculate Next Birthday</button></div><div class="result" id="birthdayResult"></div></div></section>
+
+<section class="panel" id="daysold"><div class="card"><h2>How Many Days Old Am I?</h2><p class="intro">Calculate the total days, weeks, hours and minutes you have lived.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="ddob"></div><div><label>Calculate On</label><input type="date" id="dref"></div></div>
+<div class="actions"><button class="primary" onclick="calcDaysOld()">Calculate</button></div><div class="result" id="daysResult"></div></div></section>
+
+<section class="panel" id="ondate"><div class="card"><h2>Age on a Specific Date</h2><p class="intro">Find your exact age on any past or future date.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="odob"></div><div><label>Selected Date</label><input type="date" id="oref"></div></div>
+<div class="actions"><button class="primary" onclick="calcOnDate()">Calculate Age</button></div><div class="result" id="onDateResult"></div></div></section>
+
+<section class="panel" id="baby"><div class="card"><h2>Baby Age Calculator</h2><p class="intro">Calculate a baby's age in months, weeks and days.</p>
+<div class="form-grid"><div><label>Baby Date of Birth</label><input type="date" id="babyDob"></div><div><label>Calculate On</label><input type="date" id="babyRef"></div></div>
+<div class="actions"><button class="primary" onclick="calcBaby()">Calculate Baby Age</button></div><div class="result" id="babyResult"></div></div></section>
+
+<section class="panel" id="pet"><div class="card"><h2>Pet Age Calculator</h2><p class="intro">Estimate dog or cat age in human years.</p>
+<div class="form-grid"><div><label>Pet Type</label><select id="petType"><option value="dog">Dog</option><option value="cat">Cat</option></select></div><div><label>Pet Age (Years)</label><input type="number" min="0" step="0.1" id="petAge" placeholder="Example: 3"></div></div>
+<div class="actions"><button class="primary" onclick="calcPet()">Calculate Pet Age</button></div><div class="result" id="petResult"></div></div></section>
+
+<section class="panel" id="profile"><div class="card"><h2>Birthday Profile</h2><p class="intro">Discover useful information based on your date of birth.</p>
+<div class="form-grid"><div><label>Date of Birth</label><input type="date" id="profileDob"></div></div>
+<div class="actions"><button class="primary" onclick="calcProfile()">Create Birthday Profile</button></div><div class="result" id="profileResult"></div></div></section>
+
+<section class="panel" id="photo"><div class="card"><h2>Age Calculator by Photo</h2><p class="intro">Upload a photo for an AI-powered age estimation feature.</p>
+<div class="upload"><label style="font-size:18px;cursor:pointer">📸 Select Photo<input type="file" id="photoInput" accept="image/*" style="display:block;margin:15px auto"></label><img class="preview" id="preview" alt="Photo preview"></div>
+<div class="notice"><b>AI connection required:</b> Automatic age estimation from a face photo needs an AI/computer-vision API. The upload interface is ready; the API can be connected later. Results should always be presented as an estimated age range, not an exact age.</div>
+<div class="result" id="photoResult"></div></div></section>
+
+<section class="tools"><h2 style="text-align:center">All Age Tools Included</h2><div class="tool-grid">
+<div class="tool" onclick="go('age')"><h3>🎂 Age Calculator</h3><p>Exact years, months and days.</p></div>
+<div class="tool" onclick="go('chrono')"><h3>📅 Chronological Age</h3><p>Age on a reference date.</p></div>
+<div class="tool" onclick="go('difference')"><h3>👥 Age Difference</h3><p>Compare two birth dates.</p></div>
+<div class="tool" onclick="go('birthday')"><h3>🎉 Next Birthday</h3><p>Birthday countdown.</p></div>
+<div class="tool" onclick="go('daysold')"><h3>📆 Days Old</h3><p>Total days and weeks lived.</p></div>
+<div class="tool" onclick="go('ondate')"><h3>🗓 Age on Date</h3><p>Calculate age on any date.</p></div>
+<div class="tool" onclick="go('baby')"><h3>👶 Baby Age</h3><p>Baby age in months and weeks.</p></div>
+<div class="tool" onclick="go('pet')"><h3>🐶 Pet Age</h3><p>Dog and cat age estimate.</p></div>
+<div class="tool" onclick="go('profile')"><h3>🎁 Birthday Profile</h3><p>Birth weekday and zodiac.</p></div>
+<div class="tool" onclick="go('photo')"><h3>📸 Photo Age</h3><p>Ready for AI age estimation.</p></div>
+</div></section>
+</main><footer>© <span id="year"></span> Age Calculator · Free Online Age Tools</footer>
+
+<script>
+const now=new Date(), today=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);
+['asof','cref','dref','oref','babyRef'].forEach(id=>document.getElementById(id).value=today);document.getElementById('year').textContent=now.getFullYear();
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+function go(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===id));document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});}
+function date(v){if(!v)return null;let [y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d)}
+function diff(a,b){if(!a||!b||b<a)return null;let y=b.getFullYear()-a.getFullYear(),m=b.getMonth()-a.getMonth(),d=b.getDate()-a.getDate();if(d<0){m--;let pm=(b.getMonth()+11)%12,py=pm===11?b.getFullYear()-1:b.getFullYear();d+=new Date(py,pm+1,0).getDate()}if(m<0){y--;m+=12}let days=Math.floor((Date.UTC(b.getFullYear(),b.getMonth(),b.getDate())-Date.UTC(a.getFullYear(),a.getMonth(),a.getDate()))/86400000);return{y,m,d,days}}
+function show(id,html){let e=document.getElementById(id);e.innerHTML=html;e.classList.add('show')}
+function ageBox(x,title='Your Exact Age'){return `<div class="big"><small>${title}</small><strong>${x.y} Years, ${x.m} Months, ${x.d} Days</strong></div><div class="stats"><div class="stat"><b>${x.y}</b><span>Years</span></div><div class="stat"><b>${x.m}</b><span>Months</span></div><div class="stat"><b>${x.d}</b><span>Days</span></div><div class="stat"><b>${x.days.toLocaleString()}</b><span>Total Days</span></div></div>`}
+function invalid(id,msg='Please enter valid dates.') {show(id,`<div class="notice">${msg}</div>`)}
+function calcMain(){let a=date(dob.value),b=date(asof.value),x=diff(a,b);if(!x)return invalid('mainResult');let nb=new Date(b.getFullYear(),a.getMonth(),a.getDate());if(nb<b)nb.setFullYear(nb.getFullYear()+1);let left=Math.ceil((Date.UTC(nb.getFullYear(),nb.getMonth(),nb.getDate())-Date.UTC(b.getFullYear(),b.getMonth(),b.getDate()))/86400000);show('mainResult',ageBox(x)+`<div class="info"><div><small>Born On</small><b>${a.toLocaleDateString(undefined,{weekday:'long'})}</b></div><div><small>Next Birthday</small><b>${left} Days Away</b></div></div>`)}
+function calcChrono(){let x=diff(date(cdob.value),date(cref.value));if(!x)return invalid('chronoResult');show('chronoResult',ageBox(x,'Chronological Age'))}
+function calcDifference(){let a=date(p1.value),b=date(p2.value);if(!a||!b)return invalid('diffResult');if(a>b)[a,b]=[b,a];let x=diff(a,b);show('diffResult',ageBox(x,'Exact Age Difference'))}
+function calcBirthday(){let a=date(bdob.value);if(!a)return invalid('birthdayResult');let t=date(today),n=new Date(t.getFullYear(),a.getMonth(),a.getDate());if(n<t)n.setFullYear(n.getFullYear()+1);let days=Math.ceil((Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())-Date.UTC(t.getFullYear(),t.getMonth(),t.getDate()))/86400000);show('birthdayResult',`<div class="big"><small>Your Next Birthday</small><strong>${days} Days Away</strong></div><div class="info"><div><small>Next Birthday Date</small><b>${n.toLocaleDateString()}</b></div><div><small>Birthday Day</small><b>${n.toLocaleDateString(undefined,{weekday:'long'})}</b></div></div>`)}
+function calcDaysOld(){let a=date(ddob.value),b=date(dref.value),x=diff(a,b);if(!x)return invalid('daysResult');show('daysResult',`<div class="stats"><div class="stat"><b>${x.days.toLocaleString()}</b><span>Total Days</span></div><div class="stat"><b>${Math.floor(x.days/7).toLocaleString()}</b><span>Total Weeks</span></div><div class="stat"><b>${(x.days*24).toLocaleString()}</b><span>Total Hours</span></div><div class="stat"><b>${(x.days*24*60).toLocaleString()}</b><span>Total Minutes</span></div></div>`)}
+function calcOnDate(){let x=diff(date(odob.value),date(oref.value));if(!x)return invalid('onDateResult');show('onDateResult',ageBox(x,'Age on Selected Date'))}
+function calcBaby(){let x=diff(date(babyDob.value),date(babyRef.value));if(!x)return invalid('babyResult');show('babyResult',`<div class="big"><small>Baby's Exact Age</small><strong>${x.y} Years, ${x.m} Months, ${x.d} Days</strong></div><div class="stats"><div class="stat"><b>${x.m+x.y*12}</b><span>Total Months</span></div><div class="stat"><b>${Math.floor(x.days/7)}</b><span>Total Weeks</span></div><div class="stat"><b>${x.days}</b><span>Total Days</span></div></div>`)}
+function calcPet(){let a=parseFloat(petAge.value),type=petType.value;if(isNaN(a)||a<0)return invalid('petResult','Please enter a valid pet age.');let human=type==='dog'?(a<=1?a*15:a<=2?15+(a-1)*9:24+(a-2)*5):a<=1?a*15:a<=2?15+(a-1)*9:24+(a-2)*4;show('petResult',`<div class="big"><small>Estimated ${type==='dog'?'Dog':'Cat'} Age in Human Years</small><strong>${human.toFixed(1)} Human Years</strong></div><div class="notice">This is a general estimate. Breed, size and health can affect pet aging.</div>`)}
+function zodiac(d){let m=d.getMonth()+1,day=d.getDate();let z=[[1,20,'Capricorn'],[2,19,'Aquarius'],[3,21,'Pisces'],[4,20,'Aries'],[5,21,'Taurus'],[6,21,'Gemini'],[7,23,'Cancer'],[8,23,'Leo'],[9,23,'Virgo'],[10,23,'Libra'],[11,22,'Scorpio'],[12,22,'Sagittarius']];for(let i=z.length-1;i>=0;i--)if(m>z[i][0]||(m===z[i][0]&&day>=z[i][1]))return z[i][2];return'Capricorn'}
+function calcProfile(){let a=date(profileDob.value);if(!a)return invalid('profileResult');show('profileResult',`<div class="big"><small>Your Birthday Profile</small><strong>${zodiac(a)}</strong></div><div class="info"><div><small>Born On</small><b>${a.toLocaleDateString(undefined,{weekday:'long'})}</b></div><div><small>Date of Birth</small><b>${a.toLocaleDateString()}</b></div></div>`)}
+photoInput.addEventListener('change',function(){let f=this.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{preview.src=e.target.result;preview.style.display='block';show('photoResult','<div class="notice">Photo loaded successfully. Connect an AI vision API here to return an estimated age range.</div>')};r.readAsDataURL(f)});
+</script></body></html>
