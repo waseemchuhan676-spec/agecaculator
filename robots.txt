@@ -1,5 +1,4 @@
-# robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://agecalculator-kappa.vercel.app/sitemap.xml
+Sitemap: https://agecaculator-kappa.vercel.app/sitemap.xml
